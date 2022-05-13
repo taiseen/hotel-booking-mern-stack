@@ -8,7 +8,7 @@ const PropertyList = () => {
         <div className='propertyList'>
             {
                 data.propertyList.map(item => (
-                    <div className="propertyItem">
+                    <div className="propertyItem" key={item.name}>
                         <img
                             alt={item.name}
                             src={item.imgLink}

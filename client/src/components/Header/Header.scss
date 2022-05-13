@@ -47,7 +47,7 @@
 
         .headerBtn {
 
-            background : var(--btnThemeColor);
+            background : var(--btnColor);
             color      : var(--white);
             font-weight: 500;
             padding    : 10px;
@@ -75,8 +75,13 @@
                 gap        : 10px;
                 cursor     : pointer;
 
-                .headerSearchInput::placeholder {
-                    color: var(--themeColor);
+                .headerSearchInput {
+
+                    font-size: 16px;
+
+                    &::placeholder {
+                        color: var(--themeColor);
+                    }
                 }
 
                 .ourCustomDateForPosition {
@@ -94,7 +99,7 @@
                     border-radius     : 5px;
                     box-shadow        : 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
                     -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
-                    z-index : 101;
+                    z-index           : 101;
 
 
                     .optionItems {
@@ -119,8 +124,8 @@
                                 // padding: 5px 10px;
                                 width           : 30px;
                                 height          : 30px;
-                                border          : 1px solid var(--btnThemeColor);
-                                color           : var(--btnThemeColor);
+                                border          : 1px solid var(--btnColor);
+                                color           : var(--btnColor);
                                 cursor          : pointer;
                                 background-color: var(--white);
 

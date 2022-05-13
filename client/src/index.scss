@@ -1,15 +1,18 @@
-// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@100;200;300;400;500;600&display=swap');
 
 /* 13 - May - 2022 */
 
 :root {
-    --themeColor   : #003580;
-    --btnThemeColor: #0071c2;
-    --black        : #0b0b0d;
-    --white        : #fff;
-    --border       : 1px solid var(--white);
-    --searchBorder : 3px solid #febb02;
-    --blackBorder  : 1px solid rgba(0, 0, 0, .1);
+    --themeColor  : #003580;
+    --btnColor    : #0071c2;
+    --black       : #0b0b0d;
+    --green       : #008009;
+    --white       : #fff;
+    --gray        : #555;
+    --yellow      : #febb02;
+    --border      : 1px solid var(--white);
+    --searchBorder: 3px solid var(--yellow);
+    --blackBorder : 1px solid rgba(0, 0, 0, .1);
 }
 
 * {
@@ -18,14 +21,14 @@
     border            : 0;
     outline           : none;
     list-style        : none;
-    // user-select    : none;
     text-decoration   : none;
-    text-transform    : capitalize;
+    // user-select    : none;
+    // text-transform : capitalize;
     box-sizing        : border-box;
-    font-family       : 'Poppins', sans-serif;
+    font-family       : 'Nunito', sans-serif;
     transition        : all .1s linear;
 }
 
-*::selection{
-    background-color: #d3a72d;
+*::selection {
+    background-color: var(--yellow);
 }

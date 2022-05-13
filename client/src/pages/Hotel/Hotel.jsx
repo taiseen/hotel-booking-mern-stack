@@ -1,7 +1,9 @@
-
 import { Link } from 'react-router-dom'
 import './Hotel.scss'
 
+
+// this <Component /> call from 🟨 App.js 🟨 <Component />
+// by the help of React <Router> DOM
 const Hotel = () => {
 
 

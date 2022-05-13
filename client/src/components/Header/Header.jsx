@@ -14,7 +14,6 @@ import './Header.scss';
 const Header = ({ type }) => {
 
   const navigate = useNavigate();
-
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -31,8 +30,9 @@ const Header = ({ type }) => {
     children: 0,
     room: 1,
   });
+  
 
-
+  // handle data manipulation for useState options variable...
   const handleOptions = (name, operation) => {
     setOptions(prev => ({
       ...prev,
@@ -40,6 +40,11 @@ const Header = ({ type }) => {
         ? options[name] + 1
         : options[name] - 1
     }))
+  }
+
+  const handleDestination = () => {
+    setOpenOptions(false)
+    setOpenDate(false)
   }
 
   const handelToggling = (value) => {
@@ -52,6 +57,13 @@ const Header = ({ type }) => {
     }
   }
 
+
+  // 🟨🟨🟨 data send through the help of react-router-dom...
+  const handleSearch = () => {
+    navigate('/hotels', { state: { destination, date, options } })
+    setOpenOptions(false)
+    setOpenDate(false)
+  }
 
 
 
@@ -107,18 +119,21 @@ const Header = ({ type }) => {
             <div className="headerSearch">
 
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faBed} classNam="headerIcon" />
+                <FontAwesomeIcon icon={faBed} className="headerIcon" />
                 <input
+                  required
                   type="text"
                   placeholder='Where are you going?'
                   className='headerSearchInput'
+                  onClick={handleDestination}
+                  onChange={e => setDestination(e.target.value)}
                 />
               </div>
 
 
               {/* 🟨🟨🟨 UI for ==> Calender & its functionality... */}
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faCalendarDays} classNam="headerIcon" />
+                <FontAwesomeIcon icon={faCalendarDays} className="headerIcon" />
 
                 <span
                   className='headerSearchText'
@@ -130,15 +145,17 @@ const Header = ({ type }) => {
               `}
                 </span>
 
-                { // by user click, its toggling as open/close... 
+                {
+                  // 🟨🟨🟨 UI for ==> Date Picking...
+                  // by user click, its toggling as open/close... 
                   openDate &&
                   <DateRange
-                    editableDateInputs={true}
-                    onChange={(item) => setDate([item.selection])}
-                    moveRangeOnFirstSelection={false}
                     ranges={date}
-                    className="ourCustomDateForPosition"
                     minDate={new Date()}
+                    editableDateInputs={true}
+                    moveRangeOnFirstSelection={false}
+                    className="ourCustomDateForPosition"
+                    onChange={(item) => setDate([item.selection])}
                   />
                 }
               </div>
@@ -147,7 +164,7 @@ const Header = ({ type }) => {
               {/* for ==> (·) press ==> alt + 0 + 1 + 8 + 3 */}
               {/* 🟨🟨🟨 UI for ==> Adult + Children + Room... */}
               <div className="headerSearchItem">
-                <FontAwesomeIcon icon={faPerson} classNam="headerIcon" />
+                <FontAwesomeIcon icon={faPerson} className="headerIcon" />
                 <span
                   className='headerSearchText'
                   onClick={() => handelToggling(false)}
@@ -225,7 +242,11 @@ const Header = ({ type }) => {
               </div>
 
               <div className="headerSearchItem">
-                <button className="headerBtn">Search </button>
+                <button
+                  className="headerBtn"
+                  onClick={handleSearch}
+                >
+                  Search</button>
               </div>
 
             </div>

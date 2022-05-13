@@ -12,6 +12,10 @@
 | 6| yarn add `jsonwebtoken`  | JSON Web Token implementation                     |
 | 7| yarn add `cookie-parser` | Parse Cookie header and populate req.cookies with an object |
 
-* openssl rand -base64 32
+* creating for random key 🔽🔽🔽
+
+```
+openssl rand -base64 32
+```
 
 Learning by inspired from[.](https://youtu.be/k3Vfj-e1Ma4)
