@@ -11,3 +11,6 @@
 |No| Package Installs       | Usage of                                          |
 |--|------------------------|---------------------------------------------------|
 | 1| yarn add `sass`        | styling the UI .                                  |
+
+
+Learning by inspired from[.](https://youtu.be/RkWpJ4XUHuw)

@@ -1,0 +1,31 @@
+// @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
+
+/* 13 - May - 2022 */
+
+:root {
+    --themeColor   : #003580;
+    --btnThemeColor: #0071c2;
+    --black        : #0b0b0d;
+    --white        : #fff;
+    --border       : 1px solid var(--white);
+    --searchBorder : 3px solid #febb02;
+    --blackBorder  : 1px solid rgba(0, 0, 0, .1);
+}
+
+* {
+    margin            : 0;
+    padding           : 0;
+    border            : 0;
+    outline           : none;
+    list-style        : none;
+    // user-select    : none;
+    text-decoration   : none;
+    text-transform    : capitalize;
+    box-sizing        : border-box;
+    font-family       : 'Poppins', sans-serif;
+    transition        : all .1s linear;
+}
+
+*::selection{
+    background-color: #d3a72d;
+}

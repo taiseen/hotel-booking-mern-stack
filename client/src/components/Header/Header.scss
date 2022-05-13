@@ -1,0 +1,141 @@
+.header {
+    background     : var(--themeColor);
+    color          : var(--white);
+    border-top     : var(--blackBorder);
+    display        : flex;
+    justify-content: center;
+    position       : relative;
+
+
+    .headerContainer {
+        width    : 100%;
+        max-width: 1024px;
+        margin   : 20px 0px 100px;
+
+        &.listMode {
+            margin: 20px 0px 0px;
+        }
+
+        .headerList {
+            display      : flex;
+            gap          : 40px;
+            margin-bottom: 50px;
+
+            .headerListItem {
+                display      : flex;
+                align-items  : center;
+                gap          : 10px;
+                padding      : 10px;
+                border-radius: 20px;
+                cursor       : pointer;
+                border       : transparent;
+
+                &:hover {
+                    color     : var(--themeColor);
+                    background: var(--white);
+                }
+
+                &.active {
+                    border: var(--border);
+                }
+            }
+        }
+
+        .headerDecs {
+            margin: 20px 0px;
+        }
+
+        .headerBtn {
+
+            background : var(--btnThemeColor);
+            color      : var(--white);
+            font-weight: 500;
+            padding    : 10px;
+            cursor     : pointer;
+        }
+
+        .headerSearch {
+            position        : absolute;
+            bottom          : -25px;
+            height          : 50px;
+            width           : 100%;
+            max-width       : 1024px;
+            background-color: var(--white);
+            color           : var(--themeColor);
+            border          : var(--searchBorder);
+            border-radius   : 5px;
+            padding         : 25px 5px;
+            display         : flex;
+            align-items     : center;
+            justify-content : space-around;
+
+            .headerSearchItem {
+                display    : flex;
+                align-items: center;
+                gap        : 10px;
+                cursor     : pointer;
+
+                .headerSearchInput::placeholder {
+                    color: var(--themeColor);
+                }
+
+                .ourCustomDateForPosition {
+                    position: absolute;
+                    top     : 50px;
+                    z-index : 101;
+                    border  : var(--blackBorder);
+                }
+
+                .options {
+                    background-color  : var(--white);
+                    position          : absolute;
+                    top               : 50px;
+                    border            : var(--blackBorder);
+                    border-radius     : 5px;
+                    box-shadow        : 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+                    -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+                    z-index : 101;
+
+
+                    .optionItems {
+                        width          : 250px;
+                        display        : flex;
+                        justify-content: space-between;
+                        margin         : 10px;
+
+                        .optionCounter {
+                            display    : flex;
+                            align-items: center;
+                            gap        : 10px;
+                            font-size  : 14px;
+
+                            .optionNumber {
+                                width     : 15px;
+                                text-align: center;
+                            }
+
+                            .optionCounterBtn {
+
+                                // padding: 5px 10px;
+                                width           : 30px;
+                                height          : 30px;
+                                border          : 1px solid var(--btnThemeColor);
+                                color           : var(--btnThemeColor);
+                                cursor          : pointer;
+                                background-color: var(--white);
+
+                                &:hover {
+                                    background-color: #ddd;
+                                }
+
+                                &:disabled {
+                                    cursor: not-allowed;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

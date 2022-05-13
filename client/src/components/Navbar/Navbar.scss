@@ -1,0 +1,30 @@
+.navbar {
+    height         : 50px;
+    background     : var(--themeColor);
+    display        : flex;
+    justify-content: center;
+
+    .navContainer {
+        width          : 100%;
+        max-width      : 1024px;
+        color          : var(--white);
+        display        : flex;
+        align-items    : center;
+        justify-content: space-between;
+
+        .logo {
+            font-weight: 500;
+            color      : var(--white);
+        }
+
+        .navItems {
+
+            .navBtn {
+                margin-left: 20px;
+                padding    : 5px 10px;
+                color      : var(--themeColor);
+                cursor     : pointer;
+            }
+        }
+    }
+}
