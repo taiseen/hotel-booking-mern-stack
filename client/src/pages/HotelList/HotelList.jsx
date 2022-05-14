@@ -26,7 +26,7 @@ const HotelList = () => {
 
     if (id === 'min') {
       // if (minPrice >= 100) {
-        setMinPrice(value)
+      setMinPrice(value)
       // } else {
       //   setMinPrice(100)
       // }
@@ -97,7 +97,8 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.adult}
-                    value={options.adult}
+                    // value={options.adult}
+                    // onChange={e => setOptions(prev => ({ ...prev, adult: prev.adult + 1 }))}
                   />
                 </div>
 
@@ -108,7 +109,7 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.children}
-                    value={options.children}
+                    // value={options.children}
                   />
                 </div>
 
@@ -119,7 +120,7 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.room}
-                    value={options.room}
+                    // value={options.room}
                   />
                 </div>
 

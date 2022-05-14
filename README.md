@@ -4,8 +4,8 @@
 
 # React + SASS 
 * yarn create react-app .
-# Client Site Dependencies...
 
+# Yarn | Client Site Dependencies...
 |No| Package Installs     | Usage for...                                      |
 |--|----------------------|---------------------------------------------------|
 | 1| yarn add `sass` | styling the UI .                                  |
