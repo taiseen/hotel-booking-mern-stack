@@ -1,11 +1,14 @@
 import "react-date-range/dist/styles.css"; // main css file | this file must br top of "theme css file".
 import "react-date-range/dist/theme/default.css"; // theme css file | for hover color + soft animation.
-import { useLocation } from 'react-router-dom';
 import { Navbar, Header, SearchItem } from '../../components';
-import { format, min } from 'date-fns';
-import { useState } from 'react';
-import './HotelList.scss'
+import { useLocation } from 'react-router-dom';
+import { Circles } from 'react-loader-spinner';
 import { DateRange } from 'react-date-range';
+import { format } from 'date-fns';
+import { useState } from 'react';
+import useFetch from './../../constants/useFetch';
+import demoData from './../../constants/demoData';
+import './HotelList.scss'
 
 
 // this <Component /> call from 🟨 App.js 🟨 <Component />
@@ -13,28 +16,20 @@ import { DateRange } from 'react-date-range';
 const HotelList = () => {
 
   const location = useLocation();
-  const [minPrice, setMinPrice] = useState(100);
-  const [maxPrice, setMaxPrice] = useState(10000);
+  const [minPrice, setMinPrice] = useState(undefined);
+  const [maxPrice, setMaxPrice] = useState(undefined);
   const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState(location?.state?.date);
+  const [dates, setDates] = useState(location?.state?.dates);
   const [options, setOptions] = useState(location?.state?.options);
   const [destination, setDestination] = useState(location?.state?.destination);
 
-  const handlePrice = (e) => {
+  const endPoint = `hotels?city=${destination}&min=${minPrice || 0}&max=${maxPrice || 999}`;
+  const { data, loading, reFetchData } = useFetch(endPoint);
 
-    const { value, id } = e.target;
-
-    if (id === 'min') {
-      // if (minPrice >= 100) {
-      setMinPrice(value)
-      // } else {
-      //   setMinPrice(100)
-      // }
-    } else {
-      setMaxPrice(value)
-    }
-
+  const handelClick = () => {
+    reFetchData(endPoint)
   }
+
 
   return (
     <div>
@@ -55,8 +50,8 @@ const HotelList = () => {
               <label htmlFor="">Check-in-Date</label>
               <span className="displayDate" onClick={() => setOpenDate(!openDate)}>
                 {`
-                  ${format(date[0].startDate, 'dd-MMM-yyyy')} to 
-                  ${format(date[0].endDate, 'dd-MMM-yyyy')}  
+                  ${format(dates[0].startDate, 'dd-MMM-yyyy')} to 
+                  ${format(dates[0].endDate, 'dd-MMM-yyyy')}  
                 `}
               </span>
               {
@@ -64,9 +59,9 @@ const HotelList = () => {
                 // by user click, its toggling as open/close... 
                 openDate &&
                 <DateRange
-                  ranges={date}
+                  ranges={dates}
                   minDate={new Date()}
-                  onChange={item => setDate([item.selection])}
+                  onChange={item => setDates([item.selection])}
                 />
               }
             </div>
@@ -79,14 +74,26 @@ const HotelList = () => {
                 <div className="optionItem">
                   <span className="optionText">Min price <small>per night</small> </span>
                   <span className="price">
-                    <input type="number" placeholder="100" className="optionInput" value={minPrice} id='min' onChange={handlePrice} />
+                    <input
+                      type="number"
+                      placeholder="100"
+                      value={minPrice}
+                      className="optionInput"
+                      onChange={e => setMinPrice(e.target.value)}
+                    />
                   </span>
                 </div>
 
                 <div className="optionItem">
                   <span className="optionText">Max price <small>per night</small> </span>
                   <span className="price">
-                    <input type="number" placeholder="1000" className="optionInput" value={maxPrice} id='max' onChange={handlePrice} />
+                    <input
+                      type="number"
+                      placeholder="1000"
+                      value={maxPrice}
+                      className="optionInput"
+                      onChange={e => setMaxPrice(e.target.value)}
+                    />
                   </span>
                 </div>
 
@@ -97,8 +104,8 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.adult}
-                    // value={options.adult}
-                    // onChange={e => setOptions(prev => ({ ...prev, adult: prev.adult + 1 }))}
+                  // value={options.adult}
+                  // onChange={e => setOptions(prev => ({ ...prev, adult: prev.adult + 1 }))}
                   />
                 </div>
 
@@ -109,7 +116,7 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.children}
-                    // value={options.children}
+                  // value={options.children}
                   />
                 </div>
 
@@ -120,7 +127,7 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.room}
-                    // value={options.room}
+                  // value={options.room}
                   />
                 </div>
 
@@ -130,7 +137,7 @@ const HotelList = () => {
 
             <button
               className="listSearchBtn"
-
+              onClick={handelClick}
             >
               Search
             </button>
@@ -138,10 +145,11 @@ const HotelList = () => {
           </div>
 
           <div className="searchResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-
+            {
+              loading
+                ? <Circles color="#003580" />
+                : data && data?.map((item, i) => <SearchItem key={i} item={item} demoData={demoData} i={i} />)
+            }
           </div>
 
         </div>

@@ -1,25 +1,28 @@
+import { Link } from 'react-router-dom'
 import './SearchItem.scss'
 
+
 // this <Component /> call from 🟨 ../../pages/HotelList.js 🟨 <Component />
-const SearchItem = () => {
+const SearchItem = ({ item, demoData , i}) => {
+
 
     return (
         <div className='searchItem'>
             <img
-                alt=""
+                alt={item.name}
                 className="searchImg"
-                src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
+                src={demoData?.propertyList[i]?.imgLink}
             />
 
             <div className="searchDesc">
-                <h1 className="searchTitle">Tower Street Apartments</h1>
-                <span className="searchDistance">500m from center</span>
+                <h1 className="searchTitle">{item.name}</h1>
+                <span className="searchDistance">{item.distance} || {item.city} </span>
                 <span className="searchTaxiOp">Free airport taxi</span>
                 <span className="searchSubtitle">
                     Studio Apartment with Air conditioning
                 </span>
                 <span className="searchFeatures">
-                    Entire studio • 1 bathroom • 21m² 1 full bed
+                    Entire studio • 1 bathroom • 21m² 1 full bed <br /> {item.distance}
                 </span>
                 <span className="searchCancelOp">Free cancellation </span>
                 <span className="searchCancelOpSubtitle">
@@ -28,14 +31,19 @@ const SearchItem = () => {
             </div>
 
             <div className="searchDetails">
-                <div className="searchRating">
-                    <span>Excellent</span>
-                    <button>8.9</button>
-                </div>
+                {
+                    item.rating &&
+                    <div className="searchRating">
+                        <span>Excellent</span>
+                        <button>{item.rating}</button>
+                    </div>
+                }
                 <div className="searchDetailTexts">
-                    <span className="searchPrice">$112</span>
+                    <span className="searchPrice">${item.cheapestPrice}</span>
                     <span className="searchTaxOp">Includes taxes and fees</span>
-                    <button className="searchCheckButton">See availability</button>
+                    <Link to={`/hotels/${item._id}`}>
+                        <button className="searchCheckButton">See availability</button>
+                    </Link>
                 </div>
             </div>
         </div>

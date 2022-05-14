@@ -2,6 +2,8 @@ import "react-date-range/dist/styles.css"; // main css file | this file must br 
 import "react-date-range/dist/theme/default.css"; // theme css file | for hover color + soft animation.
 import { faBed, faCalendarDays, faCar, faPerson, faPlane, faTaxi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useSearchContext } from "../../context/SearchContext";
+import { NEW_SEARCH } from "../../constants/actionTypes";
 import { useNavigate } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
@@ -14,9 +16,10 @@ import './Header.scss';
 const Header = ({ type }) => {
 
   const navigate = useNavigate();
+  const { dispatch } = useSearchContext()
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
-  const [date, setDate] = useState([
+  const [dates, setDates] = useState([
     {
       startDate: new Date(),
       endDate: new Date(),
@@ -30,7 +33,7 @@ const Header = ({ type }) => {
     children: 0,
     room: 1,
   });
-  
+
 
   // handle data manipulation for useState options variable...
   const handleOptions = (name, operation) => {
@@ -60,7 +63,8 @@ const Header = ({ type }) => {
 
   // 🟨🟨🟨 data send through the help of react-router-dom...
   const handleSearch = () => {
-    navigate('/hotels', { state: { destination, date, options } })
+    dispatch({ type: NEW_SEARCH, payload: { destination, dates, options } })
+    navigate('/hotels', { state: { destination, dates, options } })
     setOpenOptions(false)
     setOpenDate(false)
   }
@@ -140,8 +144,8 @@ const Header = ({ type }) => {
                   onClick={() => handelToggling(true)}
                 >
                   {`
-                ${format(date[0].startDate, 'dd-MMM-yyyy')} to 
-                ${format(date[0].endDate, 'dd-MMM-yyyy')}
+                ${format(dates[0].startDate, 'dd-MMM-yyyy')} to 
+                ${format(dates[0].endDate, 'dd-MMM-yyyy')}
               `}
                 </span>
 
@@ -150,12 +154,12 @@ const Header = ({ type }) => {
                   // by user click, its toggling as open/close... 
                   openDate &&
                   <DateRange
-                    ranges={date}
+                    ranges={dates}
                     minDate={new Date()}
                     editableDateInputs={true}
                     moveRangeOnFirstSelection={false}
                     className="ourCustomDateForPosition"
-                    onChange={(item) => setDate([item.selection])}
+                    onChange={(item) => setDates([item.selection])}
                   />
                 }
               </div>

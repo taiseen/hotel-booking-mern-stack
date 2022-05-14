@@ -1,26 +1,32 @@
-import data from '../../constants/data';
+import { Circles } from 'react-loader-spinner';
+import demoData from '../../constants/demoData';
+import useFetch from '../../constants/useFetch';
 import './Featured.scss';
 
 
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const Featured = () => {
 
+  const { data, loading } = useFetch('hotels/countByCity?cities=Tokio,France,London');
+
   return (
     <div className="featured">
       {
-        data.featured.map(item => (
-          <div className="featuredItem" key={item.name}>
-            <img
-              alt={item.name}
-              src={item.imgLink}
-              className="featuredImg"
-            />
-            <div className="featuredTitles">
-              <h1>{item.name}</h1>
-              <h2>{item.propertyNumber}</h2>
+        loading
+          ? <Circles color="#003580" />
+          : demoData?.featured.map((item, i) => (
+            <div className="featuredItem" key={i}>
+              <img
+                alt={item.name}
+                src={item.imgLink}
+                className="featuredImg"
+              />
+              <div className="featuredTitles">
+                <h1>{item.name}</h1>
+                <h2>{data[i]}</h2>
+              </div>
             </div>
-          </div>
-        ))
+          ))
       }
     </div>
   )

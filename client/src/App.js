@@ -3,6 +3,7 @@ import { Home, HotelList, Hotel } from './pages';
 
 
 const App = () => {
+  
   return (
     <BrowserRouter>
       <Routes>

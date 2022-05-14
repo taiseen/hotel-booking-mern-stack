@@ -1,25 +1,32 @@
-import data from '../../constants/data';
+import { Circles } from 'react-loader-spinner';
+import demoData from '../../constants/demoData';
+import useFetch from '../../constants/useFetch';
 import './PropertyList.scss';
 
 
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const PropertyList = () => {
+
+    const { data, loading } = useFetch('hotels/countByType');
+
     return (
         <div className='propertyList'>
             {
-                data.propertyList.map(item => (
-                    <div className="propertyItem" key={item.name}>
-                        <img
-                            alt={item.name}
-                            src={item.imgLink}
-                            className="propertyImg"
-                        />
-                        <div className="propertyTitle">
-                            <h1>{item.name}</h1>
-                            <h2>{item.propertyNumber}</h2>
+                loading
+                    ? <Circles color="#003580" />
+                    : demoData?.propertyList.map((item, i) => (
+                        <div className="propertyItem" key={i}>
+                            <img
+                                alt={item.name}
+                                src={item.imgLink}
+                                className="propertyImg"
+                            />
+                            <div className="propertyTitle">
+                                <h1>{item.name}</h1>
+                                <h2>{data[i]?.count || 0} {data[i]?.type || 0}</h2>
+                            </div>
                         </div>
-                    </div>
-                ))
+                    ))
             }
         </div>
     )
