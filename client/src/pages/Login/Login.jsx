@@ -1,45 +1,59 @@
 import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS } from '../../constants/actionTypes';
 import { useAuthContext } from '../../context/AuthContext';
-import { baseUrl } from '../../constants/baseUrl';
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../../constants/baseURL';
 import './Login.scss';
 
 
 const Login = () => {
 
+    const navigate = useNavigate();
+    const { error, dispatch } = useAuthContext();
     const [credentials, setCredentials] = useState({
         email: undefined,
         password: undefined,
     })
 
-    const { user, loading, error, dispatch } = useAuthContext();
 
-    console.log(user);
-    console.log(credentials);
-
+    // only collect data from input fields...
     const handleChange = (e) => {
         setCredentials(prev => ({ ...prev, [e.target.id]: e.target.value }));
     }
 
 
+    // when user click at Login Button
     const handleClick = async (e) => {
-        e.preventDefault();
+        // e.preventDefault();
 
         dispatch({ type: LOGIN_START });
 
         try {
-            const res = await axios.post(`${baseUrl}/auth/sign-in`, credentials);
+            const res = await api.post('/auth/sign-in', credentials);
             dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+            navigate('/');
 
         } catch (error) {
             dispatch({ type: LOGIN_FAILURE, payload: error.response.data })
         }
     }
 
+
+    // only for user enter button...
+    const handleEnterButtonPress = (e) => {
+        if (e.key === 'Enter') {
+            handleClick();
+        }
+    }
+
+
+
+
     return (
         <div className='login'>
             <div className="container">
+
+                <Link to='/'><p>Home Page</p></Link>
 
                 <input
                     type="text"
@@ -57,12 +71,15 @@ const Login = () => {
                     placeholder='Password'
                     onChange={handleChange}
                     value={credentials.password}
+                    onKeyDown={handleEnterButtonPress}
                 />
 
                 <button className="loginBtn" onClick={handleClick}>Login</button>
 
                 {
-                    error ? <span>{error.message}</span> : <span className='success'>Login Successful</span>
+                    error &&
+                    <span>{error.message}</span>
+                    // : <span className='success'>Login Successful</span>
                 }
 
             </div>

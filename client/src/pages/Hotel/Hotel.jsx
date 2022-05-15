@@ -4,11 +4,12 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { Footer, Header, MailList, Navbar } from './../../components';
+import { Footer, Header, MailList, Navbar, Reserve } from './../../components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchContext } from '../../context/SearchContext';
+import { useAuthContext } from "../../context/AuthContext";
+import { useNavigate, useParams } from "react-router-dom";
 import { Circles } from 'react-loader-spinner';
-import { useParams } from "react-router-dom";
 import { useState } from "react";
 import useFetch from './../../constants/useFetch';
 import demoData from './../../constants/demoData';
@@ -21,20 +22,22 @@ import './Hotel.scss'
 const Hotel = () => {
 
   const { id } = useParams();
-  
+  const { user } = useAuthContext();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
+  const [bookingModal, setBookingModal] = useState(false);
 
   const { dates, options } = useSearchContext();
   const { data, loading } = useFetch(`/hotels/${id}`);
 
+  // date subtraction calculation
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
   function dayDifference(date1, date2) {
     const timeDiff = Math.abs(date2.getTime() - date1.getTime());
     const diffDays = Math.ceil(timeDiff / MILLISECONDS_PER_DAY);
     return diffDays;
   }
-
   const days = dayDifference(dates[0].endDate, dates[0].startDate);
 
 
@@ -48,7 +51,8 @@ const Hotel = () => {
     setSlideNumber(i);
   };
 
-  // image direction manipulation...
+  // image direction manipulation... 
+  // Right-to-Left || Left-to-Right
   const handleMove = (direction) => {
     let newSlideNumber;
     if (direction === "r") {
@@ -58,6 +62,17 @@ const Hotel = () => {
     }
     setSlideNumber(newSlideNumber)
   };
+
+
+
+  // if user not login send him at Login page... 
+  const handleBooking = () => {
+    if (user) {
+      setBookingModal(true);
+    } else {
+      navigate('/login');
+    }
+  }
 
 
 
@@ -73,7 +88,7 @@ const Hotel = () => {
             : data &&
             <div className="hotelWrapper">
 
-              <button className="bookNow">Reserve or Book Now!</button>
+              <button className="bookNow" onClick={handleBooking}>Reserve or Book Now!</button>
               <h1 className="hotelTitle">{data.name}</h1>
 
               <div className="hotelAddress">
@@ -91,7 +106,7 @@ const Hotel = () => {
 
               <div className="hotelImages">
                 {
-                  // 🟨🟨🟨 UI For ==> display for all photos...
+                  // 🟨🟨🟨 UI For ==> display all photos...
                   demoData?.photos?.map((photo, i) => (
                     <div className="hotelImgWrapper" key={i}>
                       <img
@@ -113,15 +128,15 @@ const Hotel = () => {
                 </div>
 
                 <div className="hotelDetailsPrice">
-                  <h1>Perfect for a {days}-night stay!</h1>
+                  <h1>Perfect for a {days + 1}-night stay!</h1>
                   <span>
                     Located in the real heart of Krakow, this property has an
                     excellent location score of 9.8!
                   </span>
                   <h2>
-                    <b>${days * data.cheapestPrice * options.room}</b> ({days} nights)
+                    <b>${(days + 1) * data.cheapestPrice * options.room}</b> ({days + 1} nights)
                   </h2>
-                  <button>Reserve or Book Now!</button>
+                  <button onClick={handleBooking}>Reserve or Book Now!</button>
                 </div>
 
               </div>
@@ -130,6 +145,7 @@ const Hotel = () => {
         }
 
         {
+          // 🟨🟨🟨 UI for ==> Image Slider 
           open &&
           <div className="slider">
 
@@ -156,6 +172,11 @@ const Hotel = () => {
               onClick={() => handleMove("r")}
             />
           </div>
+        }
+
+        {
+          // 🟨🟨🟨 UI for ==> Hotel Booking Modal...
+          bookingModal && <Reserve setBookingModal={setBookingModal} hotelID={id} />
         }
         <MailList />
         <Footer />

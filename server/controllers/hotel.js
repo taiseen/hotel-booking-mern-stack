@@ -1,4 +1,5 @@
 import Hotels from "../models/Hotels.js"
+import Rooms from "../models/Rooms.js";
 
 
 export const addHotel = async (req, res, next) => {
@@ -27,13 +28,16 @@ export const getHotel = async (req, res, next) => {
 }
 
 
+
+
+
 export const getAllHotel = async (req, res, next) => {
 
     const { min, max, city, ...others } = req.query;
 
     try {
         const allHotel = await Hotels
-            .find({ ...others,  cheapestPrice: { $gte: min || 99, $lte: max || 999 } })
+            .find({ ...others, cheapestPrice: { $gte: min || 99, $lte: max || 999 } })
             .limit(req.query.limit);
 
         res.status(200).json(allHotel);
@@ -118,13 +122,18 @@ export const countByType = async (req, res, next) => {
 
 
 export const getHotelRooms = async (req, res, next) => {
+
     try {
+        // 1st) 🟩 Find Hotel...
         const hotel = await Hotels.findById(req.params.id);
+
+        // 2nd) 🟩 Find Hotel... || for multiple value, use ==> Promise.all() 
         const list = await Promise.all(
-            hotel.rooms.map((room) => {
-                return Room.findById(room);
+            hotel.rooms.map(room => {
+                return Rooms.findById(room);
             })
         );
+
         res.status(200).json(list)
     } catch (err) {
         next(err);

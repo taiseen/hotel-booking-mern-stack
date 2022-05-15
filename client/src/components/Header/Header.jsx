@@ -3,8 +3,9 @@ import "react-date-range/dist/theme/default.css"; // theme css file | for hover 
 import { faBed, faCalendarDays, faCar, faPerson, faPlane, faTaxi } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSearchContext } from "../../context/SearchContext";
+import { useAuthContext } from "../../context/AuthContext";
 import { NEW_SEARCH } from "../../constants/actionTypes";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { DateRange } from "react-date-range";
 import { useState } from "react";
 import { format } from "date-fns";
@@ -16,7 +17,8 @@ import './Header.scss';
 const Header = ({ type }) => {
 
   const navigate = useNavigate();
-  const { dispatch } = useSearchContext()
+  const { user } = useAuthContext();
+  const { dispatch } = useSearchContext();
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [dates, setDates] = useState([
@@ -116,7 +118,11 @@ const Header = ({ type }) => {
               Get rewarded for your travels – unlock instant savings of 10% or more with a free hotel-booking account
             </p>
 
-            <button className="headerBtn">Sign in / Register</button>
+            {
+              !user && <Link to='/login'>
+                <button className="headerBtn">Sign in / Register</button>
+              </Link>
+            }
 
 
             {/* 🟨🟨🟨 UI for ==> search by date for hotel booking */}

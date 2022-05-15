@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
-import axios from "axios";
-import { baseUrl } from './baseUrl';
+import api from './baseURL';
 
+
+// this function call from 🟨 ../page/Hotel 🟨 <Components />
+// this function call from 🟨 ../page/HotelList 🟨 <Components />
 // this function call from 🟨 ../components/Featured 🟨 <Components />
 // this function call from 🟨 ../components/PropertyList 🟨 <Components />
 // this function call from 🟨 ../components/FeaturedProperties 🟨 <Components />
@@ -11,13 +13,13 @@ const useFetch = (endPoint) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const url = baseUrl + endPoint;
+    // const url = baseUrl + endPoint;
 
     useEffect(() => {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const res = await axios.get(url);
+                const res = await api.get(endPoint);
                 setData(res.data);
             } catch (error) {
                 setError(error);
@@ -25,13 +27,13 @@ const useFetch = (endPoint) => {
             setLoading(false);
         }
         fetchData();
-    }, [url]);
+    }, [endPoint]);
 
 
     const reFetchData = async () => {
         setLoading(true);
         try {
-            const res = await axios.get(url);
+            const res = await api.get(endPoint);
             setData(res.data);
         } catch (error) {
             setError(error);

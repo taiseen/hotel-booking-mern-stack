@@ -19,11 +19,22 @@
 
         .navItems {
 
+            display    : flex;
+            align-items: center;
+
             .navBtn {
                 margin-left: 20px;
                 padding    : 5px 10px;
                 color      : var(--themeColor);
                 cursor     : pointer;
+            }
+
+            .userName {
+                background-color: #ddd;
+                padding         : 1px 15px;
+                font-size       : 19px;
+                color           : var(--themeColor);
+                border-radius   : 5px;
             }
         }
     }
