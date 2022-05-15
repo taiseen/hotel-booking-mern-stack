@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import { baseUrl } from './baseUrl';
 
 // this function call from 🟨 ../components/Featured 🟨 <Components />
 // this function call from 🟨 ../components/PropertyList 🟨 <Components />
@@ -10,7 +11,7 @@ const useFetch = (endPoint) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const url = 'http://localhost:5000/api/' + endPoint;
+    const url = baseUrl + endPoint;
 
     useEffect(() => {
         const fetchData = async () => {

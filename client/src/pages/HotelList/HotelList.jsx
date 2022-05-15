@@ -23,7 +23,7 @@ const HotelList = () => {
   const [options, setOptions] = useState(location?.state?.options);
   const [destination, setDestination] = useState(location?.state?.destination);
 
-  const endPoint = `hotels?city=${destination}&min=${minPrice || 0}&max=${maxPrice || 999}`;
+  const endPoint = `/hotels?city=${destination}&min=${minPrice || 0}&max=${maxPrice || 999}`;
   const { data, loading, reFetchData } = useFetch(endPoint);
 
   const handelClick = () => {

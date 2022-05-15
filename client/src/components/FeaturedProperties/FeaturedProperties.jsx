@@ -7,7 +7,7 @@ import './FeaturedProperties.scss'
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const FeaturedProperties = () => {
 
-    const { data, loading } = useFetch('hotels?featured=true&limit=4&min=100&max=400');
+    const { data, loading } = useFetch('/hotels?featured=true&limit=4&min=100&max=400');
 
     return (
         <div className='featuredProperties'>

@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, } from "react-router-dom";
-import { Home, HotelList, Hotel } from './pages';
+import { Home, HotelList, Hotel, Login } from './pages';
 
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<HotelList />} />
         <Route path="/hotels/:id" element={<Hotel />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   )

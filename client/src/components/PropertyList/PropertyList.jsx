@@ -7,7 +7,7 @@ import './PropertyList.scss';
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const PropertyList = () => {
 
-    const { data, loading } = useFetch('hotels/countByType');
+    const { data, loading } = useFetch('/hotels/countByType');
 
     return (
         <div className='propertyList'>

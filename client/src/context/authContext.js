@@ -2,18 +2,9 @@ import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS, LOGOUT } from "../constants/
 import { createContext, useContext, useEffect, useReducer } from "react";
 
 
-const INITIAL_STATE = {
-    user: JSON.parse(localStorage.getItem("user")) || null,
-    loading: false,
-    error: null,
-};
+const AuthReducer = (state, { type, payload }) => {
 
-
-export const AuthContext = createContext(INITIAL_STATE);
-
-
-const AuthReducer = (state, action) => {
-    switch (action.type) {
+    switch (type) {
         case LOGIN_START:
             return {
                 user: null,
@@ -22,7 +13,7 @@ const AuthReducer = (state, action) => {
             };
         case LOGIN_SUCCESS:
             return {
-                user: action.payload,
+                user: payload,
                 loading: false,
                 error: null,
             };
@@ -30,7 +21,7 @@ const AuthReducer = (state, action) => {
             return {
                 user: null,
                 loading: false,
-                error: action.payload,
+                error: payload,
             };
         case LOGOUT:
             return {
@@ -43,12 +34,32 @@ const AuthReducer = (state, action) => {
     }
 };
 
+
+// default initial state
+const INITIAL_STATE = {
+    user: JSON.parse(localStorage.getItem("user")) || null,
+    loading: false,
+    error: null,
+};
+
+
+// auth context create here...
+export const AuthContext = createContext(INITIAL_STATE);
+
+
+// this component use by wrapping at root ==> index.js for globally user data sharing...
 export const AuthContextProvider = ({ children }) => {
+
     const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
     useEffect(() => {
+        // when user login successfully... 
+        // store user info at localStorage for... 
+        // 1) ✅ after refreshing page, user data lose preventing... 
+        // 2) ✅ other needful context of use...
         localStorage.setItem("user", JSON.stringify(state.user));
     }, [state.user]);
+
 
     return (
         <AuthContext.Provider
@@ -63,5 +74,6 @@ export const AuthContextProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
+
 
 export const useAuthContext = () => useContext(AuthContext);

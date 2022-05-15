@@ -7,7 +7,7 @@ import './Featured.scss';
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const Featured = () => {
 
-  const { data, loading } = useFetch('hotels/countByCity?cities=Tokio,France,London');
+  const { data, loading } = useFetch('/hotels/countByCity?cities=Tokio,France,London');
 
   return (
     <div className="featured">

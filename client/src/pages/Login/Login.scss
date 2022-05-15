@@ -1,0 +1,40 @@
+.login {
+    height         : 100vh;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+
+    .container {
+        display       : flex;
+        flex-direction: column;
+        gap           : 10px;
+
+        .loginInput {
+            height : 30px;
+            padding: 10px;
+            border : var(--blackBorder);
+        }
+
+        .loginBtn {
+            border          : none;
+            padding         : 10px 20px;
+            background-color: var(--btnColor);
+            color           : var(--white);
+            font-weight     : bold;
+            cursor          : pointer;
+            border-radius   : 5px;
+
+            &:disabled {
+                background-color: #0071c28c;
+                cursor          : not-allowed;
+            }
+        }
+
+        span {
+            color: tomato;
+        }
+        .success{
+            color: rgb(10, 192, 7);
+        }
+    }
+}
