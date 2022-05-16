@@ -1,12 +1,12 @@
 import "react-date-range/dist/styles.css"; // main css file | this file must br top of "theme css file".
 import "react-date-range/dist/theme/default.css"; // theme css file | for hover color + soft animation.
 import { Navbar, Header, SearchItem } from '../../components';
+import { hotelList } from "../../constants/dataFetch";
 import { useLocation } from 'react-router-dom';
 import { Circles } from 'react-loader-spinner';
 import { DateRange } from 'react-date-range';
 import { format } from 'date-fns';
 import { useState } from 'react';
-import useFetch from './../../constants/useFetch';
 import demoData from './../../constants/demoData';
 import './HotelList.scss'
 
@@ -16,28 +16,31 @@ import './HotelList.scss'
 const HotelList = () => {
 
   const location = useLocation();
+  const [openDate, setOpenDate] = useState(false);
   const [minPrice, setMinPrice] = useState(undefined);
   const [maxPrice, setMaxPrice] = useState(undefined);
-  const [openDate, setOpenDate] = useState(false);
+
   const [dates, setDates] = useState(location?.state?.dates);
-  const [options, setOptions] = useState(location?.state?.options);
-  const [destination, setDestination] = useState(location?.state?.destination);
+  const [options] = useState(location?.state?.options);
+  const [destination] = useState(location?.state?.destination);
 
-  const endPoint = `/hotels?city=${destination}&min=${minPrice || 0}&max=${maxPrice || 999}`;
-  const { data, loading, reFetchData } = useFetch(endPoint);
 
-  const handelClick = () => {
-    reFetchData(endPoint)
-  }
+  const { data, loading, reFetchData } = hotelList(destination, minPrice, maxPrice);
+
+
+  const handelClick = () => reFetchData();
 
 
   return (
     <div>
+
       <Navbar />
       <Header type='list' />
+
       <div className="hotelListContainer">
         <div className="wrapper">
 
+          {/* 🟨🟨🟨 UI for SearchBarSection */}
           <div className="search">
             <h1 className="title">Search</h1>
 
@@ -104,8 +107,6 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.adult}
-                  // value={options.adult}
-                  // onChange={e => setOptions(prev => ({ ...prev, adult: prev.adult + 1 }))}
                   />
                 </div>
 
@@ -116,7 +117,6 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.children}
-                  // value={options.children}
                   />
                 </div>
 
@@ -127,7 +127,6 @@ const HotelList = () => {
                     type="number"
                     className="optionInput"
                     placeholder={options.room}
-                  // value={options.room}
                   />
                 </div>
 

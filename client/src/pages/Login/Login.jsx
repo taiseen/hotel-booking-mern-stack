@@ -1,8 +1,8 @@
 import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS } from '../../constants/actionTypes';
 import { useAuthContext } from '../../context/AuthContext';
 import { Link, useNavigate } from "react-router-dom";
+import { sign_in } from '../../constants/dataFetch';
 import { useState } from 'react';
-import api from '../../constants/baseURL';
 import './Login.scss';
 
 
@@ -29,8 +29,8 @@ const Login = () => {
         dispatch({ type: LOGIN_START });
 
         try {
-            const res = await api.post('/auth/sign-in', credentials);
-            dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+            const { data } = await sign_in(credentials);
+            dispatch({ type: LOGIN_SUCCESS, payload: data });
             navigate('/');
 
         } catch (error) {

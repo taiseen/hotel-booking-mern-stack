@@ -1,21 +1,20 @@
+import { roomBooking, showBooking } from '../../constants/dataFetch';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useSearchContext } from '../../context/SearchContext';
 import { Circles } from 'react-loader-spinner';
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
-import useFetch from '../../constants/useFetch';
-import api from '../../constants/baseURL';
-import './Reserve.scss'
+import './Booking.scss'
 
 
 // this <Component /> call from 🟨 ../pages/Hotel.js 🟨 <Component />
-const Reserve = ({ setBookingModal, hotelID }) => {
+const Booking = ({ setBookingModal, hotelID }) => {
 
     const navigate = useNavigate();
     const { dates } = useSearchContext();
     const [selectedRooms, setSelectedRooms] = useState([]);
-    const { data, loading, error } = useFetch(`/hotels/rooms/${hotelID}`);
+    const { data, loading } = showBooking(hotelID);
 
 
     // user selected date & calculate How many days selected...
@@ -30,14 +29,14 @@ const Reserve = ({ setBookingModal, hotelID }) => {
         }
         return dates;
     };
-    const allDates = getDatesInRange(dates[0].startDate, dates[0].endDate);
+    const userSelectedDate = getDatesInRange(dates[0].startDate, dates[0].endDate);
 
 
     // this function is only use for, 
     // previously booked room are not alow to booking again...
     const isAvailable = (roomNumber) => {
         const isFound = roomNumber.unavailableDates.some(date =>
-            allDates.includes(new Date(date).getTime())
+            userSelectedDate.includes(new Date(date).getTime())
         );
         // isFound ==> is true its meant, we can't get that room for booking
         return isFound;
@@ -61,10 +60,8 @@ const Reserve = ({ setBookingModal, hotelID }) => {
         try {
             await Promise.all(
                 selectedRooms.map(roomId => {
-                    const res = api.put(`/rooms/availability/${roomId}`, {
-                        dates: allDates,
-                    });
-                    return res.data;
+                    const { data } = roomBooking(roomId, userSelectedDate);
+                    return data;
                 })
             );
             setBookingModal(false);
@@ -91,7 +88,7 @@ const Reserve = ({ setBookingModal, hotelID }) => {
                 {
                     loading
                         ? < Circles color="#003580" className="spinner" />
-                        : data.length > 0
+                        : data?.length > 0
                             ? <>
                                 {
                                     data.map((item, i) => (
@@ -109,7 +106,7 @@ const Reserve = ({ setBookingModal, hotelID }) => {
                                             <div className="selectRooms">
                                                 {
                                                     item.roomNumbers.map(roomNumber => (
-                                                        <div className="room">
+                                                        <div className="room" key={roomNumber._id}>
                                                             <label>{roomNumber.number}</label>
                                                             <input
                                                                 type="checkbox"
@@ -139,4 +136,4 @@ const Reserve = ({ setBookingModal, hotelID }) => {
     )
 }
 
-export default Reserve
+export default Booking

@@ -4,14 +4,14 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { Footer, Header, MailList, Navbar, Reserve } from './../../components';
+import { Booking, Footer, Header, MailList, Navbar } from './../../components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSearchContext } from '../../context/SearchContext';
 import { useAuthContext } from "../../context/AuthContext";
 import { useNavigate, useParams } from "react-router-dom";
+import { singleHotel } from "../../constants/dataFetch";
 import { Circles } from 'react-loader-spinner';
 import { useState } from "react";
-import useFetch from './../../constants/useFetch';
 import demoData from './../../constants/demoData';
 import './Hotel.scss'
 
@@ -21,15 +21,17 @@ import './Hotel.scss'
 // by the help of React <Router> DOM
 const Hotel = () => {
 
+  const navigate = useNavigate();
+  
   const { id } = useParams();
   const { user } = useAuthContext();
-  const navigate = useNavigate();
+  const { data, loading } = singleHotel(id);
+  const { dates, options } = useSearchContext();
+
   const [open, setOpen] = useState(false);
   const [slideNumber, setSlideNumber] = useState(0);
   const [bookingModal, setBookingModal] = useState(false);
 
-  const { dates, options } = useSearchContext();
-  const { data, loading } = useFetch(`/hotels/${id}`);
 
   // date subtraction calculation
   const MILLISECONDS_PER_DAY = 1000 * 60 * 60 * 24;
@@ -78,6 +80,7 @@ const Hotel = () => {
 
   return (
     <div>
+      
       <Navbar />
       <Header type="list" />
 
@@ -104,6 +107,7 @@ const Hotel = () => {
                 Book a stay over ${data.cheapestPrice} at this property and get a free airport taxi
               </span>
 
+
               <div className="hotelImages">
                 {
                   // 🟨🟨🟨 UI For ==> display all photos...
@@ -119,6 +123,7 @@ const Hotel = () => {
                   ))
                 }
               </div>
+
 
               <div className="hotelDetails">
 
@@ -140,9 +145,9 @@ const Hotel = () => {
                 </div>
 
               </div>
-
             </div>
         }
+
 
         {
           // 🟨🟨🟨 UI for ==> Image Slider 
@@ -174,14 +179,16 @@ const Hotel = () => {
           </div>
         }
 
+
         {
           // 🟨🟨🟨 UI for ==> Hotel Booking Modal...
-          bookingModal && <Reserve setBookingModal={setBookingModal} hotelID={id} />
+          bookingModal && <Booking setBookingModal={setBookingModal} hotelID={id} />
         }
+
         <MailList />
         <Footer />
-      </div>
 
+      </div>
     </div>
   );
 };

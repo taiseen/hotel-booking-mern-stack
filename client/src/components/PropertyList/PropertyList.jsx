@@ -1,13 +1,13 @@
+import { propertyList } from './../../constants/dataFetch';
 import { Circles } from 'react-loader-spinner';
 import demoData from '../../constants/demoData';
-import useFetch from '../../constants/useFetch';
 import './PropertyList.scss';
 
 
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const PropertyList = () => {
 
-    const { data, loading } = useFetch('/hotels/countByType');
+    const { data, loading } = propertyList();
 
     return (
         <div className='propertyList'>

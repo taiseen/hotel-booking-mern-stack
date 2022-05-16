@@ -1,13 +1,13 @@
+import { featuredProperties } from '../../constants/dataFetch';
 import { Circles } from 'react-loader-spinner';
 import demoData from '../../constants/demoData';
-import useFetch from '../../constants/useFetch';
 import './FeaturedProperties.scss'
 
 
 // this <Component /> call from 🟨 ../../pages/Home.js 🟨 <Component />
 const FeaturedProperties = () => {
 
-    const { data, loading } = useFetch('/hotels?featured=true&limit=4&min=100&max=400');
+    const { data, loading } = featuredProperties();
 
     return (
         <div className='featuredProperties'>

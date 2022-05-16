@@ -26,7 +26,8 @@
 | 2| Organize File Structure                                             | 
 | 3| Data Passing through react-router-dom                               | 
 | 4| Implementation of `date picker` library                             | 
-| 5| ContextAPI + useReducer + Trick Part of using ContextAPI            | 
-| 6| Starting to Ending Date subtraction for `calculate Total Days`      | 
-| 7| `position: fixed` sidebar search + `hight: max-content` option      | 
-| 8| Raw image sidler `left + right moving` functionality implementation |
+| 5| `Custom Hook` implementation for `Data Fetching`                    |
+| 6| ContextAPI + useReducer + Trick Part of using ContextAPI            | 
+| 7| Starting to Ending Date subtraction for `calculate Total Days`      | 
+| 8| `position: fixed` sidebar search + `hight: max-content` option      | 
+| 9| Raw image sidler `left + right moving` functionality implementation |

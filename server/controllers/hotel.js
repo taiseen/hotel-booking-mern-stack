@@ -123,11 +123,13 @@ export const countByType = async (req, res, next) => {
 
 export const getHotelRooms = async (req, res, next) => {
 
+    const { id } = req.params;
+
     try {
         // 1st) 🟩 Find Hotel...
-        const hotel = await Hotels.findById(req.params.id);
+        const hotel = await Hotels.findById(id);
 
-        // 2nd) 🟩 Find Hotel... || for multiple value, use ==> Promise.all() 
+        // 2nd) 🟩 Find Rooms in that Hotel... || for multiple value, use ==> Promise.all() 
         const list = await Promise.all(
             hotel.rooms.map(room => {
                 return Rooms.findById(room);
