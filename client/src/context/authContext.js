@@ -1,6 +1,9 @@
 import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS, LOGOUT } from "../constants/actionTypes";
 import { createContext, useContext, useEffect, useReducer } from "react";
 
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+// 🟨 Reducer Section... 🟨
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
 
 const AuthReducer = (state, { type, payload }) => {
 
@@ -35,6 +38,10 @@ const AuthReducer = (state, { type, payload }) => {
 };
 
 
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+// 🟨 Context API Section...  🟨
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+
 // default initial state
 const INITIAL_STATE = {
     user: JSON.parse(localStorage.getItem("user")) || null,
@@ -42,10 +49,8 @@ const INITIAL_STATE = {
     error: null,
 };
 
-
 // auth context create here...
 export const AuthContext = createContext(INITIAL_STATE);
-
 
 // this component use by wrapping at root ==> index.js for globally user data sharing...
 export const AuthContextProvider = ({ children }) => {
@@ -74,6 +79,5 @@ export const AuthContextProvider = ({ children }) => {
         </AuthContext.Provider>
     );
 };
-
 
 export const useAuthContext = () => useContext(AuthContext);

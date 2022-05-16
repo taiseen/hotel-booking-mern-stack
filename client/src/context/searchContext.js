@@ -1,5 +1,9 @@
-import { createContext, useContext, useReducer } from "react";
 import { NEW_SEARCH, RESET_SEARCH } from "../constants/actionTypes";
+import { createContext, useContext, useReducer } from "react";
+
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+// 🟨 Reducer Section... 🟨
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
 
 const INITIAL_STATE = {
     city: undefined,
@@ -10,10 +14,6 @@ const INITIAL_STATE = {
         room: undefined,
     },
 };
-
-
-export const SearchContext = createContext(INITIAL_STATE);
-
 
 const SearchReducer = (state, { type, payload }) => {
     switch (type) {
@@ -26,7 +26,12 @@ const SearchReducer = (state, { type, payload }) => {
     }
 };
 
- 
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+// 🟨 Context API Section...  🟨
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+
+export const SearchContext = createContext(INITIAL_STATE);
+
 export const SearchContextProvider = ({ children }) => {
 
     const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);

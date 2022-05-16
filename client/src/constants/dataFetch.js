@@ -2,23 +2,24 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
+
 // Backend || Server ==> URL Address
 const api = axios.create({ baseURL: 'http://localhost:5000/api' });
 
 
-// this function call from ==> 
-// 🟨 ../page/Hotel 🟨 <Components />
-// 🟨 ../page/Login 🟨 <Components />
-// 🟨 ../page/HotelList 🟨 <Components />
-// 🟨 ../components/Reserve 🟨 <Components />
-// 🟨 ../components/Featured 🟨 <Components />
-// 🟨 ../components/PropertyList 🟨 <Components />
-// 🟨 ../components/FeaturedProperties 🟨 <Components />
+// this File call from ==> 
+// 1) ../page/Hotel 🟨 <Components />
+// 2) ../page/Login 🟨 <Components />
+// 3) ../page/HotelList 🟨 <Components />
+// 4) ../components/Reserve 🟨 <Components />
+// 5) ../components/Featured 🟨 <Components />
+// 6) ../components/PropertyList 🟨 <Components />
+// 7) ../components/FeaturedProperties 🟨 <Components />
 const useFetch = (endPoint) => {
 
     const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -50,6 +51,10 @@ const useFetch = (endPoint) => {
 }
 
 
+
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
+// 🟨 REST api Section...🟨
+// 🟨🟨🟨🟨🟨🟨🟨🟨🟨🟨
 export const singleHotel = (id) => useFetch(`/hotels/${id}`);
 export const featuredProperties = () => useFetch('/hotels?featured=true&limit=4&min=100&max=400');
 export const featuredCity = () => useFetch('/hotels/countByCity?cities=Tokio,France,London');
