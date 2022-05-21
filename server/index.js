@@ -4,14 +4,18 @@ import usersRoute from './routers/users.js';
 import roomsRoute from './routers/rooms.js';
 import authRoute from './routers/auth.js';
 import cookieParser from 'cookie-parser';
-import express from "express";
-import dotenv from "dotenv";
-import cors from "cors";
+import express from 'express';
+import dotenv from 'dotenv';
+import cors from 'cors';
 dotenv.config();
 
+
+// instance of express micro-framework.
 const app = express();
 
-// middle-wares
+
+// middle-wares used by express...
+// can abel to reach (req,res) before sending to the user...
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
@@ -19,15 +23,12 @@ app.use(express.static('public'));
 app.use('/fav.ico', express.static('public/fav.ico'));
 
 
-// middle-wares... can abel to reach (req,res) before sending to the user...
 // http:localhost:3000/auth
 // http:localhost:3000/hotels
 app.use('/api/auth', authRoute);
 app.use('/api/hotels', hotelRoute);
-app.use("/api/users", usersRoute);
-app.use("/api/rooms", roomsRoute);
-
-
+app.use('/api/users', usersRoute);
+app.use('/api/rooms', roomsRoute);
 
 
 // MiddleWares || for common, Details Error Message...
@@ -41,7 +42,6 @@ app.use((err, req, res, next) => {
         stack: err.stack,
     });
 });
-
 
 
 const PORT = process.env.PORT || 5000;

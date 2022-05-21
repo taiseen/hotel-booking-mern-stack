@@ -4,19 +4,21 @@ import jwt from 'jsonwebtoken';
 import bcrypt from 'bcryptjs';
 
 
+// user registration 
 export const sign_up = async (req, res, next) => {
 
     const email = req.body.email
 
     try {
+        // 1st) 🟩 find the user if the user already exits in database
         const user = await Users.findOne({ email });
         if (user) return next(createError(500, "User already exist..."));
 
-        // for only password hashing mechanism...
+        // 2nd) 🟩 user plain password, hashing mechanism...
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.password, salt);
 
-        // collect user info from Frontend & 
+        // 3rd) 🟩 collect user info from Frontend & 
         // create a user {Object} upon this info...
         const newUser = new Users({
             userName: req.body.userName,
@@ -24,6 +26,7 @@ export const sign_up = async (req, res, next) => {
             password: hash,
         });
 
+        // 4th) 🟩 data save into database
         await newUser.save();
         res.status(200).send("User has been created successfully...")
 
@@ -32,7 +35,7 @@ export const sign_up = async (req, res, next) => {
     }
 }
 
-
+// user login
 export const sign_in = async (req, res, next) => {
 
     const email = req.body.email
@@ -53,9 +56,7 @@ export const sign_in = async (req, res, next) => {
         const { password, isAdmin, ...otherInfos } = user._doc;
 
         res
-            .cookie('access_token', token, {
-                httpOnly: true,
-            })
+            .cookie('access_token', token, { httpOnly: true })
             .status(200)
             .send({ ...otherInfos });
 

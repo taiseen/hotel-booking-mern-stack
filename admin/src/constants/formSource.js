@@ -1,4 +1,4 @@
-export const userInputs = [
+const userInputs = [
     {
         id: "username",
         label: "Username",
@@ -36,7 +36,7 @@ export const userInputs = [
     },
 ];
 
-export const productInputs = [
+const productInputs = [
     {
         id: 1,
         label: "Title",
@@ -69,7 +69,7 @@ export const productInputs = [
     },
 ];
 
-export const hotelInputs = [
+const hotelInputs = [
     {
         id: "name",
         label: "Name",
@@ -120,7 +120,7 @@ export const hotelInputs = [
     },
 ];
 
-export const roomInputs = [
+const roomInputs = [
     {
         id: "title",
         label: "Title",
@@ -147,4 +147,11 @@ export const roomInputs = [
     },
 ];
 
+const formSource = {
+    userInputs,
+    productInputs,
+    hotelInputs,
+    roomInputs,
+}
 
+export default formSource;
