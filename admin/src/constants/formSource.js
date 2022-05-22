@@ -1,4 +1,4 @@
-const userInputs = [
+export const userInputs = [
     {
         id: "username",
         label: "Username",
@@ -21,6 +21,7 @@ const userInputs = [
         id: "password",
         label: "Password",
         type: "password",
+        placeholder: "··············",
     },
     {
         id: "country",
@@ -36,12 +37,12 @@ const userInputs = [
     },
 ];
 
-const productInputs = [
+export const productInputs = [
     {
         id: 1,
         label: "Title",
         type: "text",
-        placeholder: "Apple Macbook Pro",
+        placeholder: "Apple MacBook Pro",
     },
     {
         id: 2,
@@ -69,7 +70,7 @@ const productInputs = [
     },
 ];
 
-const hotelInputs = [
+export const hotelInputs = [
     {
         id: "name",
         label: "Name",
@@ -120,7 +121,7 @@ const hotelInputs = [
     },
 ];
 
-const roomInputs = [
+export const roomInputs = [
     {
         id: "title",
         label: "Title",
@@ -146,12 +147,3 @@ const roomInputs = [
         placeholder: "2",
     },
 ];
-
-const formSource = {
-    userInputs,
-    productInputs,
-    hotelInputs,
-    roomInputs,
-}
-
-export default formSource;

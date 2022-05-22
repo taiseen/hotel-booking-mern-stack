@@ -1,0 +1,91 @@
+.new {
+    width  : 100%;
+    display: flex;
+
+    .newContainer {
+        flex: 6;
+
+        .top {
+            padding: 15px 10px;
+        }
+
+        .bottom {
+            padding: 35px 10px;
+        }
+
+        .top,
+        .bottom {
+            box-shadow        : var(--boxShadow);
+            -webkit-box-shadow: var(--boxShadowWebKit);
+            margin            : 20px;
+            display           : flex;
+
+            h1 {
+                // color    : lightgray;
+                font-size: 20px;
+            }
+
+            .left {
+                flex      : 1;
+                text-align: center;
+
+                img {
+                    width        : 150px;
+                    height       : 150px;
+                    border-radius: 50%;
+                    object-fit   : cover;
+                    cursor       : pointer !important;
+                }
+            }
+
+            .right {
+                flex   : 2;
+                padding: 0px 20px;
+
+                form {
+                    display        : flex;
+                    flex-wrap      : wrap;
+                    gap            : 30px;
+                    justify-content: space-between;
+
+                    .formInput {
+                        width: 40%;
+
+                        label {
+                            display    : flex;
+                            align-items: center;
+                            gap        : 10px;
+
+                            .icon {
+                                cursor: pointer;
+                            }
+                        }
+
+                        input {
+                            width        : 100%;
+                            padding      : 5px;
+                            border       : none;
+                            border-bottom: 1px solid gray;
+                        }
+                    }
+
+                    button {
+                        width           : 150px;
+                        padding         : 10px;
+                        border          : none;
+                        background-color: rgb(0, 128, 128);
+                        color           : white;
+                        font-size       : 16px;
+                        font-weight     : bold;
+                        cursor          : pointer;
+                        margin-top      : 10px;
+
+                        &:hover {
+                            background-color: rgb(0, 67, 67);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

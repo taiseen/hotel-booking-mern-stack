@@ -1,4 +1,4 @@
-const userColumns = [
+export const userColumns = [
     { field: "_id", headerName: "ID", width: 70 },
     {
         field: "user",
@@ -36,7 +36,7 @@ const userColumns = [
     },
 ];
 
-const hotelColumns = [
+export const hotelColumns = [
     { field: "_id", headerName: "ID", width: 250 },
     {
         field: "name",
@@ -60,7 +60,7 @@ const hotelColumns = [
     },
 ];
 
-const roomColumns = [
+export const roomColumns = [
     { field: "_id", headerName: "ID", width: 70 },
     {
         field: "title",
@@ -83,11 +83,3 @@ const roomColumns = [
         width: 100,
     },
 ];
-
-const dataTableSource = {
-    userColumns,
-    hotelColumns,
-    roomColumns,
-}
-
-export default dataTableSource;

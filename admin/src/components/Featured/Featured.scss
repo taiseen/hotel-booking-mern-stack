@@ -26,8 +26,8 @@
         gap            : 15px;
 
         .featuredChart {
-            width : 200px;
-            height: 200px;
+            width : 250px;
+            height: 250px;
         }
 
         .title {
@@ -48,6 +48,7 @@
 
         .summary {
             width          : 100%;
+            margin-top     : 20px;
             display        : flex;
             align-items    : center;
             justify-content: space-between;
@@ -73,15 +74,8 @@
                     &.positive {
                         color: green;
                     }
-
-                    .resultAmount {}
                 }
             }
         }
-
-
-
-
-
     }
 }

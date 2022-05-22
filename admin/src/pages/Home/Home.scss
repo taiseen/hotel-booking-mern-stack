@@ -2,7 +2,6 @@
     display: flex;
 
     .homContainer {
-
         flex: 6;
 
         .widgets,
@@ -16,5 +15,17 @@
             padding: 5px 20px;
         }
 
+        .listContainer {
+            margin            : 20px;
+            padding           : 20px;
+            box-shadow        : var(--boxShadow);
+            -webkit-box-shadow: var(--boxShadowWebKit);
+
+            .listTitle {
+                font-weight  : 500;
+                color        : gray;
+                margin-bottom: 15px;
+            }
+        }
     }
 }

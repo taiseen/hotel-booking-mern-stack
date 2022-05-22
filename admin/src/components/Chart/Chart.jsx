@@ -2,8 +2,10 @@ import { AreaChart, Area, XAxis, CartesianGrid, Tooltip, ResponsiveContainer, } 
 import './Chart.scss'
 
 
-// this component call by ==> 🟨 ../pages/Home.js 🟨 <Component/>
+// this component call from ==> 🟨 ../pages/Home.js 🟨 <Component/>
+// this component call from ==> 🟨 ../pages/Single.js 🟨 <Component/>
 const Chart = ({ title, aspect }) => {
+
 
     const data = [
         { name: "January", Total: 1200 },
@@ -14,7 +16,10 @@ const Chart = ({ title, aspect }) => {
         { name: "June", Total: 1700 },
     ];
 
+
+
     return (
+
         <div className="chart">
 
             <div className="title">{title}</div>

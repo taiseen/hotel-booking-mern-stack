@@ -18,40 +18,37 @@
         color       : #999;
         border-color: #333;
 
-        .search {
+        .searchBar {
             border-color: gray;
         }
     }
 
-    .sidebar {
+    .sideBar {
         background-color: #111;
         border-color    : #333;
 
         .top {
+            border-color: #333;
             .logo {
                 color: #999;
             }
         }
 
-        hr {
-            border-color: #333;
-        }
-
         ul {
             li {
-                &:hover {
-                    background-color: #333;
+                span {
+                    color: #999;
                 }
 
-                .icon {
-                    color: #999;
+                &:hover {
+                    background-color: #333;
                 }
             }
         }
     }
 
-    .datatable {
-        .datagrid {
+    .dataTable {
+        .dataGrid {
             color : gray;
             border: none;
 

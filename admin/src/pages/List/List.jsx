@@ -1,8 +1,18 @@
+import { Sidebar, Navbar, DataTable } from './../../components';
 import './List.scss'
+
 
 const List = () => {
   return (
-    <div>List</div>
+    <div className='list'>
+      <Sidebar />
+
+      <div className="listContainer">
+        <Navbar />
+        <DataTable />
+      </div>
+      
+    </div>
   )
 }
 

@@ -1,7 +1,8 @@
-import { Sidebar, Navbar, Widget, Featured, Chart } from '../../components';
+import { Sidebar, Navbar, Widget, Featured, Chart, TableList } from '../../components';
 import './Home.scss';
 
 
+// this component call from ==> 🟨 ../App.js 🟨 React <Router />
 const Home = () => {
 
   return (
@@ -21,7 +22,14 @@ const Home = () => {
 
         <div className="charts">
           <Featured />
-          <Chart />
+          <Chart title={'Last 6 Months (Revenue)'}/>
+        </div>
+
+        <div className="listContainer">
+          <div className="listTitle">
+            Latest Transactions
+          </div>
+          <TableList />
         </div>
 
       </div>

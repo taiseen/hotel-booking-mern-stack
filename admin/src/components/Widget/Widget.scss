@@ -3,7 +3,6 @@
     display           : flex;
     justify-content   : space-between;
     padding           : 10px;
-    height            : 100px;
     border-radius     : 3px;
     box-shadow        : var(--boxShadow);
     -webkit-box-shadow: var(--boxShadowWebKit);
@@ -21,7 +20,7 @@
         }
 
         .counter {
-            font-size  : 28px;
+            font-size  : 48px;
             font-weight: 300;
         }
 
@@ -34,7 +33,7 @@
         .percentages {
             display    : flex;
             align-items: center;
-            font-size  : 14px;
+            font-size  : 18px;
 
             &.positive {
                 color: green;
@@ -46,12 +45,10 @@
         }
 
         .icon {
-            font-size          : 25px;
+            font-size          : 35px;
             padding            : 5px;
-            // background-color: rgba(192, 9, 192, .2);
             border-radius      : 2px;
             align-self         : flex-end;
         }
     }
-
 }
