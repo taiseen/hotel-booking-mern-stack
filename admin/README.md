@@ -9,3 +9,4 @@ yarn add react-circular-progressbar
 yarn add recharts
 
 https://recharts.org/en-US/api
+https://cloudinary.com

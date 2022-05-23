@@ -1,6 +1,6 @@
 import { useAuthContext } from "../../context/AuthContext";
 import { LOGOUT } from "../../constants/actionTypes";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import './Navbar.scss'
 
 
@@ -9,12 +9,18 @@ import './Navbar.scss'
 const Navbar = () => {
 
   const { user, dispatch } = useAuthContext();
+  const navigate = useNavigate();
 
+  // user logout function
   const handleLogOut = () => {
     dispatch({ type: LOGOUT });
     localStorage.clear()
   }
 
+  // login by Registration Button...
+  const handleLoginRegister = () => {
+    navigate('/login', { state: true })
+  }
 
   return (
     <div className="navbar">
@@ -33,9 +39,10 @@ const Navbar = () => {
                 <button className="navBtn" onClick={handleLogOut}>Logout</button>
               </>
               : <>
-                <button className="navBtn">Register</button>
+                <button className="navBtn" onClick={handleLoginRegister}>Register</button>
+
                 <Link to='/login'>
-                  <button className="navBtn">Login</button>
+                  <button className="navBtn" onClick={handleLoginRegister}>Login</button>
                 </Link>
               </>
           }

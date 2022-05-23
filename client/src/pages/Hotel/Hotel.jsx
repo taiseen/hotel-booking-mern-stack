@@ -22,7 +22,7 @@ import './Hotel.scss'
 const Hotel = () => {
 
   const navigate = useNavigate();
-  
+
   const { id } = useParams();
   const { user } = useAuthContext();
   const { data, loading } = singleHotel(id);
@@ -80,7 +80,7 @@ const Hotel = () => {
 
   return (
     <div>
-      
+
       <Navbar />
       <Header type="list" />
 
@@ -168,7 +168,11 @@ const Hotel = () => {
 
             {/* 🟨🟨🟨 UI For ==> display for single photo... */}
             <div className="sliderWrapper">
-              <img src={demoData?.photos[slideNumber].src} alt="" className="sliderImg" />
+              <img
+                alt="single img"
+                className="sliderImg"
+                src={demoData?.photos[slideNumber].src}
+              />
             </div>
 
             <FontAwesomeIcon

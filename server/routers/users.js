@@ -5,10 +5,10 @@ import express from "express";
 const router = express('router');
 
 
-router.get('/', verifyAdmin, getAllUser);
-router.get('/:id', verifyUser, getUser);
-router.put('/:id', verifyUser, updateUser);
-router.delete('/:id', verifyUser, deleteUser);
+router.get('/',  getAllUser); //verifyAdmin,
+router.get('/:id',  getUser); // verifyUser,
+router.put('/:id',  updateUser); // verifyUser,
+router.delete('/:id',  deleteUser); // verifyUser,
 
 
 export default router;

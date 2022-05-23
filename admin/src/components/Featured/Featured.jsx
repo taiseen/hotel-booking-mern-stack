@@ -32,7 +32,7 @@ const Featured = () => {
                 </div>
 
                 <p className="title">Total sales today</p>
-                <p className="amount">$420</p>
+                <p className="amount">$680</p>
                 <p className="desc"> Previous transactions processing. <br /> Last payments may not be included.</p>
 
                 <div className="summary">

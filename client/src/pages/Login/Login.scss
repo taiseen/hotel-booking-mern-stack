@@ -32,6 +32,14 @@
             }
         }
 
+        .accountCreate {
+            cursor: pointer;
+
+            strong:hover {
+                text-decoration: underline;
+            }
+        }
+
         span {
             color: tomato;
         }

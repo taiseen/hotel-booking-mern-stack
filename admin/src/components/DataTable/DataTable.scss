@@ -2,6 +2,7 @@
     height : 600px;
     padding: 20px;
 
+
     .dataTableTitle {
         width          : 100%;
         font-size      : 24px;
@@ -20,6 +21,11 @@
             padding        : 5px;
             border-radius  : 5px;
             cursor         : pointer;
+
+            &:hover {
+                color     : white;
+                background: green;
+            }
         }
     }
 
@@ -57,9 +63,12 @@
     }
 
     .cellAction {
-        display    : flex;
-        align-items: center;
-        gap        : 15px;
+        width          : 100%;
+        display        : flex;
+        align-items    : center;
+        justify-content: space-evenly;
+        gap            : 15px;
+        border         : none;
 
         .viewButton {
             padding      : 2px 5px;
@@ -67,6 +76,11 @@
             color        : darkblue;
             border       : 1px dotted rgba(0, 0, 139, 0.596);
             cursor       : pointer;
+
+            &:hover {
+                background-color: darkblue;
+                color           : white;
+            }
         }
 
         .deleteButton {
@@ -75,6 +89,11 @@
             color        : crimson;
             border       : 1px dotted rgba(220, 20, 60, 0.6);
             cursor       : pointer;
+
+            &:hover {
+                background-color: crimson;
+                color           : white;
+            }
         }
     }
 }

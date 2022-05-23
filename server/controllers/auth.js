@@ -21,8 +21,9 @@ export const sign_up = async (req, res, next) => {
         // 3rd) 🟩 collect user info from Frontend & 
         // create a user {Object} upon this info...
         const newUser = new Users({
-            userName: req.body.userName,
-            email: req.body.email,
+            // userName: req.body.userName,
+            // email: req.body.email,
+            ...req.body,
             password: hash,
         });
 

@@ -38,6 +38,7 @@ const Header = ({ type }) => {
 
 
   // handle data manipulation for useState options variable...
+  // object{ key:value } +/-
   const handleOptions = (name, operation) => {
     setOptions(prev => ({
       ...prev,

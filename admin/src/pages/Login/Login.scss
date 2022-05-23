@@ -1,0 +1,40 @@
+.login {
+    height         : 100vh;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+
+    .container {
+        display       : flex;
+        flex-direction: column;
+        gap           : 10px;
+        text-align    : center;
+        font-size     : 18px;
+
+        .loginInput {
+            font-size: 18px;
+            padding  : 10px 12px;
+            border   : var(--border);
+            border-radius   : 2px;
+        }
+
+        .loginBtn {
+            font-size       : 18px;
+            padding         : 10px 20px;
+            background-color: var(--themeColor);
+            color           : var(--white);
+            font-weight     : bold;
+            cursor          : pointer;
+            border-radius   : 2px;
+
+            &:disabled {
+                background-color: #0071c28c;
+                cursor          : not-allowed;
+            }
+        }
+
+        span {
+            color: tomato;
+        }
+    }
+}

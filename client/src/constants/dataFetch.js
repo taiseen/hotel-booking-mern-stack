@@ -63,6 +63,7 @@ export const showBooking = (hotelID) => useFetch(`/hotels/rooms/${hotelID}`);
 export const hotelList = (destination, minPrice, maxPrice) =>
     useFetch(`/hotels?city=${destination}&min=${minPrice || 0}&max=${maxPrice || 999}`);
 
+export const sign_up = (credentials) => api.post('/auth/sign-up', credentials);
 export const sign_in = (credentials) => api.post('/auth/sign-in', credentials);
 
 export const roomBooking = (roomId, selectedDate) => api.put(`/rooms/availability/${roomId}`, { dates: selectedDate });

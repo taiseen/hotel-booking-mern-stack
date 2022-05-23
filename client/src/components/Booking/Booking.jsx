@@ -43,7 +43,7 @@ const Booking = ({ setBookingModal, hotelID }) => {
     };
 
 
-    // ✅ only handle check box click + its associated value behind it ✅
+    // ✅✅ check box click + its value 
     const handleSelect = (e) => {
         const { checked, value } = e.target;
 
@@ -61,7 +61,7 @@ const Booking = ({ setBookingModal, hotelID }) => {
             await Promise.all(
                 selectedRooms.map(roomId => {
                     const { data } = roomBooking(roomId, userSelectedDate);
-                    return data;
+                    return data; // roomBooking is a PUT request
                 })
             );
             setBookingModal(false);

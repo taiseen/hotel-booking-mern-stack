@@ -147,7 +147,9 @@ const HotelList = () => {
             {
               loading
                 ? <Circles color="#003580" />
-                : data && data?.map((item, i) => <SearchItem key={i} item={item} demoData={demoData} i={i} />)
+                : data && data?.map((item, i) => (
+                  <SearchItem key={i} item={item} demoData={demoData} i={i} />
+                ))
             }
           </div>
 

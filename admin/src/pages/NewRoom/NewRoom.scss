@@ -1,0 +1,38 @@
+.right {
+    
+    text-align: right;
+    .formInput {
+        textarea {
+            width    : 100%;
+            border   : var(--border);
+            padding  : 5px;
+            font-size: 16px;
+            resize   : none;
+        }
+
+        select {
+            width    : 100%;
+            padding  : 5px 10px;
+            font-size: 14px;
+            border   : var(--border);
+            cursor   : pointer;
+        }
+    }
+
+    button {
+        margin-right     : auto;
+        width           : 150px;
+        padding         : 10px;
+        border          : none;
+        background-color: rgb(0, 128, 128);
+        color           : white;
+        font-size       : 16px;
+        font-weight     : bold;
+        cursor          : pointer;
+        margin-top      : 10px;
+
+        &:hover {
+            background-color: rgb(0, 67, 67);
+        }
+    }
+}

@@ -1,13 +1,15 @@
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { Sidebar, Navbar } from "../../components";
+import { creatingNewUser, imageUpload } from "../../hooks/useFetch";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 import "./NewUser.scss";
 
 
 // this component call from ==> 🟨 ../App.js 🟨 React <Router />
 const NewUser = ({ inputs, title }) => {
 
+  const navigate = useNavigate();
   const [file, setFile] = useState('');
   const [info, setInfo] = useState({});
 
@@ -19,29 +21,33 @@ const NewUser = ({ inputs, title }) => {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    // 🟩🟩 transfer image file into FormDat 
     const data = new FormData();
     data.append("file", file);
     data.append("upload_preset", "upload");
 
     try {
-      const uploadRes = await axios.post(
-        "https://api.cloudinary.com/v1_1/lamadev/image/upload",
-        data
-      );
-
+      // 🟩🟩 image upload in another server  
+      // 🟩🟩 + get that image object url
+      const uploadRes = await imageUpload(data);
       const { url } = uploadRes.data;
+
+      // 🟩🟩 user info + img url, send to the server 
       const newUser = { ...info, img: url };
-      await axios.post("/auth/register", newUser);
+
+      // 🟩🟩 all info save into database
+      await creatingNewUser(newUser);
+      navigate('/users');
 
     } catch (err) {
       console.log(err);
     }
   };
 
-  
+
   return (
 
-    <div className="new">
+    <div className="newUser">
 
       <Sidebar />
 
@@ -57,10 +63,9 @@ const NewUser = ({ inputs, title }) => {
 
           <div className="left">
             <img
-              src={
-                file
-                  ? URL.createObjectURL(file)
-                  : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+              src={file
+                ? URL.createObjectURL(file)
+                : 'https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg'
               }
               alt={file.name}
               onClick={() => setFile('')}
@@ -70,6 +75,7 @@ const NewUser = ({ inputs, title }) => {
           <div className="right">
 
             <form>
+
               <div className="formInput">
                 <label htmlFor="file">
                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -83,8 +89,9 @@ const NewUser = ({ inputs, title }) => {
               </div>
 
               {
-                inputs.map((input) => (
+                inputs.map(input => (
                   <div className="formInput" key={input.id}>
+
                     <label>{input.label}</label>
                     <input
                       id={input.id}
@@ -92,6 +99,7 @@ const NewUser = ({ inputs, title }) => {
                       onChange={handleChange}
                       placeholder={input.placeholder}
                     />
+
                   </div>
                 ))
               }
@@ -99,9 +107,7 @@ const NewUser = ({ inputs, title }) => {
             </form>
 
           </div>
-
         </div>
-
       </div>
     </div>
   );
