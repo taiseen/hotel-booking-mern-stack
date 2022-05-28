@@ -1,17 +1,17 @@
 12 - May - 2022 
 
 
-# Server Site Dependencies...
+# Server | side dependencies...
 |No| Package Installs         | Usage of                                          |
 |--|--------------------------|---------------------------------------------------|
-| 1| yarn add `express`       | framework of Node.Js for avoiding boilerplate code|
-| 2| yarn add `nodemon`       | restart serve on every changing..                 |
-| 3| yarn add `dotenv`        | hiding environment variables                      |
-| 4| yarn add `cros`          | Node.js CORS middleware                           |
+| 1| yarn add `express`       | Framework of Node.Js for avoiding boilerplate code|
+| 2| yarn add `nodemon`       | Restart serve on every changing..                 |
+| 3| yarn add `dotenv`        | Hiding environment variables                      |
+| 4| yarn add `cors`          | Node.js CORS middleware                           |
 | 5| yarn add `mongoose`      | MongoDB Database Schema                           |
-| 6| yarn add `bcryptjs`      | hashing for user password                         |
+| 6| yarn add `bcryptjs`      | Hashing for user password                         |
 | 7| yarn add `jsonwebtoken`  | JSON Web Token implementation                     |
-| 8| yarn add `ccorsookie-parser` | Parse Cookie header and populate req.cookies with an object |
+| 8| yarn add `cookie-parser` | Parse Cookie header and populate req.cookies with an object |
 
 
 * creating for random key 🔽🔽🔽
