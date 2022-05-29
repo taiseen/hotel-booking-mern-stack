@@ -41,10 +41,9 @@ const Header = ({ type }) => {
   // object{ key:value } +/-
   const handleOptions = (name, operation) => {
     setOptions(prev => ({
-      ...prev,
-      [name]: operation === 'i'
-        ? options[name] + 1
-        : options[name] - 1
+      ...prev, [name]: operation === 'i'
+        ? prev[name] + 1
+        : prev[name] - 1
     }))
   }
 
@@ -166,7 +165,7 @@ const Header = ({ type }) => {
                     editableDateInputs={true}
                     moveRangeOnFirstSelection={false}
                     className="ourCustomDateForPosition"
-                    onChange={(item) => setDates([item.selection])}
+                    onChange={item => setDates([item.selection])}
                   />
                 }
               </div>

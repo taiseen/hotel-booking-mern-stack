@@ -65,10 +65,51 @@ const photos = [
     },
 ];
 
+const userLoginInput = [
+    {
+        id: "userName",
+        label: "Username",
+        type: "text",
+        placeholder: "John Doe",
+    },
+    {
+        id: "email",
+        label: "Email",
+        type: "email",
+        placeholder: "john@gmail.com",
+    },
+    {
+        id: "password",
+        label: "Password",
+        type: "password",
+        placeholder: "▪▪▪▪▪▪▪▪▪▪▪▪▪▪▪",
+    },
+    {
+        id: "country",
+        label: "Country",
+        type: "text",
+        placeholder: "India",
+    },
+    {
+        id: "city",
+        label: "City",
+        type: "text",
+        placeholder: "Mumbai",
+    },
+    {
+        id: "phone",
+        label: "Phone",
+        type: "text",
+        placeholder: "+99 123 456 789",
+    },
+]
+
 const demoData = {
     featured,
     propertyList,
     photos,
+    userLoginInput
 }
+
 
 export default demoData;

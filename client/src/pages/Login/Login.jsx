@@ -1,9 +1,10 @@
-import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS } from '../../constants/actionTypes';
+import { LOGIN_FAILURE, LOGIN_START, LOGIN_SUCCESS, LOGOUT } from '../../constants/actionTypes';
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useAuthContext } from '../../context/AuthContext';
 import { sign_in, sign_up } from '../../constants/dataFetch';
 import { useState, useEffect } from 'react';
 import './Login.scss';
+import demoData from '../../constants/demoData';
 
 
 const Login = () => {
@@ -26,11 +27,20 @@ const Login = () => {
         setCreateAccount(location.state)
     }, [location.state])
 
-    const handleAccount = () => setCreateAccount(!createAccount)
+
+    const handleAccount = () => {
+        // 🔄 signIn / signUp form toggling
+        setCreateAccount(!createAccount);
+
+        // for clearing error status
+        dispatch({ type: LOGOUT });
+    }
+
 
     // only collect data from input fields...
     const handleChange = (e) => {
-        setCredentials(prev => ({ ...prev, [e.target.id]: e.target.value }));
+        const { id, value } = e.target;
+        setCredentials(prev => ({ ...prev, [id]: value }));
     }
 
 
@@ -82,62 +92,19 @@ const Login = () => {
                 {
                     createAccount
                         ? <>
-                            <input
-                                type="text"
-                                id='userName'
-                                className="loginInput"
-                                placeholder='Name'
-                                onChange={handleChange}
-                                value={credentials.userName}
-                            />
-
-                            <input
-                                type="text"
-                                id='email'
-                                className="loginInput"
-                                placeholder='Email'
-                                onChange={handleChange}
-                                value={credentials.email}
-                            />
-
-                            <input
-                                type="password"
-                                id='password'
-                                className="loginInput"
-                                placeholder='Password'
-                                onChange={handleChange}
-                                value={credentials.password}
-                                onKeyDown={handleEnterButtonPress}
-                            />
-
-                            <input
-                                type="text"
-                                id='city'
-                                className="loginInput"
-                                placeholder='City'
-                                onChange={handleChange}
-                                value={credentials.city}
-                            />
-
-                            <input
-                                type="text"
-                                id='country'
-                                className="loginInput"
-                                placeholder='Country'
-                                onChange={handleChange}
-                                value={credentials.country}
-                            />
-
-
-                            <input
-                                type="phone"
-                                id='phone'
-                                className="loginInput"
-                                placeholder='Phone'
-                                onChange={handleChange}
-                                value={credentials.phone}
-                            />
-
+                            {
+                                demoData.userLoginInput.map(input => (
+                                    <input
+                                        key={input.label}
+                                        id={input.id}
+                                        type={input.type}
+                                        className="loginInput"
+                                        placeholder={input.placeholder}
+                                        onChange={handleChange}
+                                    // value={credentials.userName}
+                                    />
+                                ))
+                            }
                             <button className="loginBtn" onClick={handleClick}>Register</button>
 
                             <p
@@ -146,9 +113,10 @@ const Login = () => {
                             >
                                 Already have an Account. <strong>Click Here</strong>
                             </p>
+
+                            {error ? <span>{error.message}</span> : null}
                         </>
                         : <>
-
                             <input
                                 type="text"
                                 id='email'
@@ -177,11 +145,7 @@ const Login = () => {
                                 Create an Account. <strong>Click Here</strong>
                             </p>
 
-                            {
-                                error &&
-                                <span>{error.message}</span>
-                                // : <span className='success'>Login Successful</span>
-                            }
+                            {error ? <span>{error.message}</span> : <span></span>}
                         </>
                 }
             </div>

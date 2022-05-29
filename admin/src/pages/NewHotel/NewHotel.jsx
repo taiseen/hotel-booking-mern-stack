@@ -49,8 +49,7 @@ const NewHotel = ({ inputs, title }) => {
 
           // 🟩🟩 image upload in another server 
           // 🟩🟩 + get that image object url
-          const uploadRes = await imageUpload(data);
-          const { url } = uploadRes.data;
+          const { data: { url } } = await imageUpload(data);
 
           return url;
         })

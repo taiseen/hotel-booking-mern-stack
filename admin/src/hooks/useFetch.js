@@ -57,6 +57,7 @@ const useFetch = (endPoint) => {
 export const userDataTable = (path) => useFetch(path);
 export const allHotels = () => useFetch('/hotels');
 export const allRooms = () => useFetch('/rooms');
+export const getUser = (id) => useFetch('/users/' + id);
 
 export const dataDelete = (pathWithId) => api.delete(pathWithId);
 

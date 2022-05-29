@@ -29,9 +29,9 @@ const NewUser = ({ inputs, title }) => {
     try {
       // 🟩🟩 image upload in another server  
       // 🟩🟩 + get that image object url
-      const uploadRes = await imageUpload(data);
-      const { url } = uploadRes.data;
-
+      const { data: { url } } = await imageUpload(data);
+      // const { url } = uploadRes.data;
+      
       // 🟩🟩 user info + img url, send to the server 
       const newUser = { ...info, img: url };
 
